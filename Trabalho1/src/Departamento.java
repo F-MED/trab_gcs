@@ -99,22 +99,14 @@ public class Departamento{
         return IDDEPART;
 
     }
-    public ArrayList <Equipamento> pesquisaEquipamento (String descricao) {
-    
-
+    public ArrayList <Equipamento> pesquisaEquipamento (String descricao){
     ArrayList <Equipamento> auxiliar = new ArrayList < > ();
-    
     for (int i = 0 ; i < equipamentos.size(); i++){
-        if (descricao == equipamentos.get(i).getDescricao()) {
-        
+        if (descricao.equals(equipamentos.get(i).getDescricao())){
         auxiliar.add(equipamentos.get(i));
-        
         }       
-    
-    
     }
      return auxiliar;
-
     }
 }
 
