@@ -69,4 +69,17 @@ public class Suporte extends Departamento{
         }
         return false;
     } 
+    
+
+    public ArrayList<Funcionario> funcionariosComChamados() {
+        ArrayList<Funcionario> list = new ArrayList<>();
+        ArrayList<Chamado> chamados = getChamados();
+
+        for(int i = 0; i<chamados.size(); i++) {
+            if(!(list.contains(chamados.get(i).getFuncionarioQueAbriu()))) {
+                list.add(chamados.get(i).getFuncionarioQueAbriu());
+            }
+        }
+        return list;
+    }    
 }
