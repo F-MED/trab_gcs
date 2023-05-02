@@ -14,6 +14,33 @@ public class Suporte extends Departamento{
         return chamados;
     }
 
+    public Chamado pesquisaChamado(int id) {
+        for(Chamado e : chamados){
+            if(id==e.getIDCHAMADO()){
+                return e;
+            }
+        }
+        return null;
+    }
+
+    public boolean statusChamado(int idFunc, int idChamdo) {
+        if(funcionarioEstaDepartamento(idFunc)){
+            Chamado aux = pesquisaChamado(idChamdo);
+            if(aux != null){
+                if(aux.getStatus().equals("Aberto")){
+                    aux.setStatus("Em andamento");
+                    return true;
+                }else if(aux.getStatus().equals("Em andamento")){
+                    aux.setStatus("Concluido");
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Chamado> listaChamados(int id) {
         ArrayList<Chamado> chamados = new ArrayList<>();
         for(Chamado x: this.getChamados()) {
@@ -41,7 +68,8 @@ public class Suporte extends Departamento{
             return true;
         }
         return false;
-    }
+    } 
+    
 
     public ArrayList<Funcionario> funcionariosComChamados() {
         ArrayList<Funcionario> list = new ArrayList<>();
@@ -53,7 +81,5 @@ public class Suporte extends Departamento{
             }
         }
         return list;
-    }
-
-    
+    }    
 }
