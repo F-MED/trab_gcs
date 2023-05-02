@@ -44,4 +44,5 @@ public class Equipamento{
     public Date getData() {
         return data;
     }
+    
 }

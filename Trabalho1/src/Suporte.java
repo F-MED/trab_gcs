@@ -32,4 +32,16 @@ public class Suporte extends Departamento{
             }
         });
     }
+
+    public boolean moverEquipamento(Equipamento equipamento, Departamento departamentoDestino, Funcionario funcionario) {
+        if (funcionario.getDepartamento() instanceof Suporte) {
+            equipamento.getDepartamento().removeEquipamento(equipamento);
+            equipamento.setDepartamento(departamentoDestino);
+            departamentoDestino.addEquipamento(equipamento);
+            return true;
+        }
+        return false;
+    }
+
+    
 }

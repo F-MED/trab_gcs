@@ -108,5 +108,14 @@ public class Departamento{
     }
      return auxiliar;
     }
+    
+    public boolean removeEquipamento(Equipamento equipamento){
+        for(Equipamento e : equipamentos){
+            if(e.equals(equipamento)){
+                return equipamentos.remove(equipamento);
+            }
+        }
+        return false;
+    }
 }
 
