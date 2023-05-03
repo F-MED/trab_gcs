@@ -137,6 +137,24 @@ public class Suporte extends Departamento {
         }
         return false;
     }
+    public Funcionario maisChamados() {
+        Funcionario maisC = null;
+        int maior = 0;
+
+        for(int j=0; j<getFuncionarios().size(); j++) {
+            int chamds = 0;
+            for(int i=0; i<chamados.size(); i++) {
+            if(chamados.get(i).getFuncionarioQueAbriu() == getFuncionarios().get(j)) {
+                chamds++;
+            }
+        }
+        if(chamds > maior) {
+            maior = chamds;
+            maisC = getFuncionarios().get(j);
+        }
+    }
+    return maisC;
+
 
     public Chamado[] getChamadosDate(Date data) {
         Chamado chamadosdata[] = new Chamado[chamados.size()];
@@ -170,4 +188,5 @@ public class Suporte extends Departamento {
         return aux;    
     }
 
+}
 }
