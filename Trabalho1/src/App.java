@@ -27,8 +27,6 @@ public class App {
         empresa.add(new Departamento("departamento de ciencias",3));
         Funcionario aux = new Funcionario(1,"fulano", empresa.get(1));
         empresa.get(1).addFuncionario(aux);
-        aux = new Funcionario(1,"fulano", empresa.get(1));
-        empresa.get(1).addFuncionario(aux);
         aux = new Funcionario(2,"fulana", empresa.get(0));
         empresa.get(0).addFuncionario(aux);
         aux = new Funcionario(3,"ciclano", empresa.get(0));
@@ -83,7 +81,6 @@ public class App {
     }
 
     public void executa(){
-        prenche();
         boolean auxBoolean;
         do {
             auxBoolean = loginFuncionario();
@@ -98,11 +95,19 @@ public class App {
                     } while (!auxBoolean);
                     break;
                 case 2:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
                     do {
                         auxBoolean = abrirChamado();
                     } while (!auxBoolean);
                     break;
                 case 3:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
                     if (login.getDepartamento() instanceof Suporte) {
                         printChamados();
                         System.out.println("informe o codigo do chamado");
@@ -111,8 +116,15 @@ public class App {
                         Chamado c = equipeDeSuporte.procuraChamadoID(idChamado);
                         System.out.println(c.toString());
                     }
+                    else{
+                        System.out.println("o usuario precisa fazer parte da equipe de suporte");
+                    }
                     break;
                 case 4:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
                     if (login.getDepartamento() instanceof Suporte) {
                         printEquipamentos();
                         System.out.println("informe o codigo do equipamento");
@@ -132,6 +144,7 @@ public class App {
                     }
                     break;
                 case 5:
+
                     System.out.println("informe a descricao");
                     String auxDesc = in.nextLine();
                     in.next();
@@ -150,6 +163,10 @@ public class App {
                     }
                     break;
                 case 6:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
                     printEquipamentos();
                     System.out.println("informe o codigo do equipamento: ");
                     int auxCodigoEquipamento = in.nextInt();
@@ -161,9 +178,58 @@ public class App {
                 case 7:
                     break;
                 case 8:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
                     printPainelDados();
                     break;
+                case 9:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
+                    System.out.println("informe o dia de hoje");
+                    int dia = in.nextInt();
+                    System.out.println("informe o mes");
+                    int mes = in.nextInt();
+                    System.out.println("informe o ano");
+                    int ano = in.nextInt();
+                    Date data = new Date(ano, mes, dia);
+                    Chamado[] chamados = equipeDeSuporte.getChamadosDate(data);
+                    for(Chamado c : chamados){
+                        System.out.println(c.toString());
+                    }
+                    break;
+
+                case 10:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
+                    ArrayList<Equipamento> equipamentos = equipeDeSuporte.equipamentosSemSup();
+                    for(Equipamento e : equipamentos){
+                        System.out.println(e.toString());
+                    }
+                    break;
                 case 11:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
+                    ArrayList<Funcionario> funcionarios = equipeDeSuporte.funcionariosComChamados();
+                    for(Funcionario f : funcionarios){
+                        System.out.println(f.toString());
+                    }
+                    break;
+                case 12:
+                    if(equipeDeSuporte==null){
+                        System.out.println("erro, não ha um departamento de suporte");
+                        break;
+                    }
+                    Funcionario aux = equipeDeSuporte.maisChamados();
+                    System.out.println(aux.toString());
+                case 13:
                     menu(1);
                     int menuOption2 = in.nextInt();
                     switch (menuOption2) {
@@ -177,7 +243,7 @@ public class App {
                             System.out.println("informe o nome do funcionario");
                             String auxNome = in.nextLine();
                             in.next();
-                            Funcionario aux = new Funcionario(countIdFuncionario, auxNome, auxDepartamento);
+                            aux = new Funcionario(countIdFuncionario, auxNome, auxDepartamento);
                             aux.getDepartamento().addFuncionario(aux);
                             countIdFuncionario++;
                             break;
@@ -199,12 +265,12 @@ public class App {
                             String auxDescricao = in.nextLine();
                             in.next();
                             System.out.println("informe o dia de hoje");
-                            int dia = in.nextInt();
+                            dia = in.nextInt();
                             System.out.println("informe o mes");
-                            int mes = in.nextInt();
+                            mes = in.nextInt();
                             System.out.println("informe o ano");
-                            int ano = in.nextInt();
-                            Date data = new Date(ano, mes, dia);
+                            ano = in.nextInt();
+                            data = new Date(ano, mes, dia);
                             Equipamento auxEquipe = new Equipamento(countIdEquipamento, nomeEquipamento, auxDepartamento, auxDescricao, data);
                             auxEquipe.getDepartamento().addEquipamento(auxEquipe);
                             break;
@@ -262,7 +328,7 @@ public class App {
                             System.out.println("opcao invalida");
                     }
                     break;
-                case 12:
+                case 14:
                     exit(0);
                 default:
                     System.out.println("opcao invalida");
@@ -418,9 +484,12 @@ public class App {
                 System.out.println("7------funcionalidade 7: localizar chamados por palavra chave");
                 System.out.println("8------funcionalidade 8: dados dos chamados");
                 System.out.println("9------funcionalidade 9: chamados de um determinado dia");
-                System.out.println("10-----funcionalidade 10:");
-                System.out.println("11-----alteracoes");
-                System.out.println("12-----sair do programa");
+                System.out.println("10-----funcionalidade 10: equipamentos sem chamados");
+                System.out.println("11-----funcionalidade 11: funcionarios com chamados");
+                System.out.println("12-----funcionalidade 12: funcionarios com mais chamados");
+                System.out.println("13-----alteracoes");
+                System.out.println("14-----sair do programa");
+                break;
             case 1:
                 System.out.println("1------adicionar chamado");
                 System.out.println("2------adicionar funcionario");
