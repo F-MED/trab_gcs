@@ -141,52 +141,51 @@ public class Suporte extends Departamento {
         Funcionario maisC = null;
         int maior = 0;
 
-        for(int j=0; j<getFuncionarios().size(); j++) {
+        for (int j = 0; j < getFuncionarios().size(); j++) {
             int chamds = 0;
-            for(int i=0; i<chamados.size(); i++) {
-            if(chamados.get(i).getFuncionarioQueAbriu() == getFuncionarios().get(j)) {
-                chamds++;
-            }
-        }
-        if(chamds > maior) {
-            maior = chamds;
-            maisC = getFuncionarios().get(j);
-        }
-    }
-    return maisC;
-
-
-    public Chamado[] getChamadosDate(Date data) {
-        Chamado chamadosdata[] = new Chamado[chamados.size()];
-        int j = 0;
-        for (int i=0; i<chamados.size(); i++) {
-            if(chamados.get(i).getDataAberto() == data) {
-                chamadosdata[j] = chamados.get(i);
-                j++;
-            }
-        }
-        return chamadosdata;
-    }
-
-    public ArrayList <Equipamento> equipamentosSemSup() {
-        ArrayList <Equipamento> aux = new ArrayList < > ();
-        int equip = 0;
-        int k = 0;
-        
-        for (int j=0; j<getEquipamentos().size(); j++) {
-            for (int i=0; i<chamados.size(); i++) {
-                if(chamados.get(i).getEquipamentoSuporte() != getEquipamentos().get(j)) {
-                    equip++;
-                    if(equip == chamados.size()) {
-                        aux.add(k,getEquipamentos().get(j));
-                        k++;
-                    } 
+            for (int i = 0; i < chamados.size(); i++) {
+                if (chamados.get(i).getFuncionarioQueAbriu() == getFuncionarios().get(j)) {
+                    chamds++;
                 }
-        
+            }
+            if (chamds > maior) {
+                maior = chamds;
+                maisC = getFuncionarios().get(j);
             }
         }
-        return aux;    
+        return maisC;
     }
 
-}
-}
+        public Chamado[] getChamadosDate(Date data) {
+            Chamado chamadosdata[] = new Chamado[chamados.size()];
+            int j = 0;
+            for (int i=0; i<chamados.size(); i++) {
+                if(chamados.get(i).getDataAberto() == data) {
+                    chamadosdata[j] = chamados.get(i);
+                    j++;
+                }
+            }
+            return chamadosdata;
+        }
+
+        public ArrayList <Equipamento> equipamentosSemSup() {
+            ArrayList <Equipamento> aux = new ArrayList < > ();
+            int equip = 0;
+            int k = 0;
+
+            for (int j=0; j<getEquipamentos().size(); j++) {
+                for (int i=0; i<chamados.size(); i++) {
+                    if(chamados.get(i).getEquipamentoSuporte() != getEquipamentos().get(j)) {
+                        equip++;
+                        if(equip == chamados.size()) {
+                            aux.add(k,getEquipamentos().get(j));
+                            k++;
+                        }
+                    }
+
+                }
+            }
+            return aux;
+        }
+    }
+
