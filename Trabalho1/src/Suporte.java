@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Suporte extends Departamento{
+public class Suporte extends Departamento {
     private ArrayList<Chamado> chamados;
 
     public Suporte(int idDepart) {
@@ -13,7 +13,6 @@ public class Suporte extends Departamento{
     public ArrayList<Chamado> getChamados() {
         return chamados;
     }
-
     public Chamado pesquisaChamado(int id) {
         for(Chamado e : chamados){
             if(id==e.getIDCHAMADO()){
@@ -43,13 +42,14 @@ public class Suporte extends Departamento{
 
     public ArrayList<Chamado> listaChamados(int id) {
         ArrayList<Chamado> chamados = new ArrayList<>();
-        for(Chamado x: this.getChamados()) {
+        for (Chamado x : this.getChamados()) {
             if (x.getEquipamentoSuporte().getID() == id)
                 chamados.add(x);
         }
         ordenaLista(chamados);
         return chamados;
     }
+
     public void ordenaLista(ArrayList<Chamado> lista) {
         Collections.sort(lista, new Comparator<Chamado>() {
             public int compare(Chamado o1, Chamado o2) {
@@ -60,6 +60,51 @@ public class Suporte extends Departamento{
         });
     }
 
+    public Chamado procuraChamadoID(int id) {
+        for (Chamado c : chamados) {
+            if (c.getIDCHAMADO() == id) return c;
+        }
+        return null;
+    }
+
+    public boolean addChamado(Chamado chamado) {
+        return chamados.add(chamado);
+    }
+
+    public int numeroDeChamados() {
+        return chamados.size();
+    }
+
+    public int numeroDeChamadosAberto() {
+        int count = 0;
+        for (Chamado c : chamados) {
+            if (c.getStatus().equals("aberto")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int numeroDeChamadosAndamento() {
+        int count = 0;
+        for (Chamado c : chamados) {
+            if (c.getStatus().equals("em andamento")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int numeroDeChamadosConcluido() {
+        int count = 0;
+        for (Chamado c : chamados) {
+            if (c.getStatus().equals("concluido")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public boolean moverEquipamento(Equipamento equipamento, Departamento departamentoDestino, Funcionario funcionario) {
         if (funcionario.getDepartamento() instanceof Suporte) {
             equipamento.getDepartamento().removeEquipamento(equipamento);
@@ -68,8 +113,7 @@ public class Suporte extends Departamento{
             return true;
         }
         return false;
-    } 
-    
+    }
 
     public ArrayList<Funcionario> funcionariosComChamados() {
         ArrayList<Funcionario> list = new ArrayList<>();
@@ -81,5 +125,16 @@ public class Suporte extends Departamento{
             }
         }
         return list;
-    }    
+    }
+
+    public boolean removeChamado(int id){
+        for(Chamado c : chamados){
+            if(c.getIDCHAMADO()==id){
+                chamados.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

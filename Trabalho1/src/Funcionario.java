@@ -28,5 +28,11 @@ public class Funcionario {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+    @Override
+    public String toString() {
+        String aux = "id:" + IDFUNC + " nome:" + nome + " departamento:" + departamento.getNome();
+        return aux;
+    }
 }
 
