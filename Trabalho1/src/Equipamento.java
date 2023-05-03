@@ -43,5 +43,16 @@ public class Equipamento{
 
     public Date getData() {
         return data;
-    }   
+    }
+
+    @Override
+    public String toString() {
+        return "Equipamento{" +
+                "IDEQUIP=" + IDEQUIP +
+                ", data=" + data +
+                ", nome=" + nome + '\'' +
+                ", departamento=" + departamento.getNome() +
+                ", descricao=" + descricao + '\'' +
+                '}';
+    }
 }

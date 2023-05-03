@@ -6,17 +6,25 @@ public class Chamado {
     private Funcionario funcionarioQueAbriu; // o Funcionario(objeto) que pediu o de suporte
     private String desc; // a descricao do problema do equipamento
     private Date dataAberto; // a data que o suporte foi aberta
-    private String status; // o status do suporte do equipamento(aberto -> em andamento ->concluído)
-
+    private String status; // o status do suporte do equipamento(aberto -> em andamento -> concluído)
 
     // metodo construtor
-    public Chamado(int IDCHAMADO, Equipamento equipamentoSuporte, Funcionario funcionarioQueAbriu, String desc, Date dataAberto, String status) {
+
+    /**
+     * metodo construtor
+     * @param IDCHAMADO identificador do chamado
+     * @param equipamentoSuporte equipamento que o suporte sera feito
+     * @param funcionarioQueAbriu o funcionario que abriu o chamado
+     * @param desc a descricao do problema
+     * @param dataAberto a data que foi aberto
+     */
+    public Chamado(int IDCHAMADO, Equipamento equipamentoSuporte, Funcionario funcionarioQueAbriu, String desc, Date dataAberto) {
         this.IDCHAMADO = IDCHAMADO;
         this.equipamentoSuporte = equipamentoSuporte;
         this.funcionarioQueAbriu = funcionarioQueAbriu;
         this.desc = desc;
         this.dataAberto = dataAberto;
-        this.status = status;
+        status = "aberto";
     }
 
     // gettes-------v
@@ -51,5 +59,10 @@ public class Chamado {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String toString(){
+        String aux = "id do chamado: " + IDCHAMADO + " equipamento: " + equipamentoSuporte.toString() + " funcionario: " + funcionarioQueAbriu.toString() + " descricao do chamado: " + desc + " data: " + dataAberto.toString() + " status: " + status;
+        return aux;
     }
 }
