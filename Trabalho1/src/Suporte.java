@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 public class Suporte extends Departamento {
     private ArrayList<Chamado> chamados;
@@ -135,6 +136,38 @@ public class Suporte extends Departamento {
             }
         }
         return false;
+    }
+
+    public Chamado[] getChamadosDate(Date data) {
+        Chamado chamadosdata[] = new Chamado[chamados.size()];
+        int j = 0;
+        for (int i=0; i<chamados.size(); i++) {
+            if(chamados.get(i).getDataAberto() == data) {
+                chamadosdata[j] = chamados.get(i);
+                j++;
+            }
+        }
+        return chamadosdata;
+    }
+
+    public ArrayList <Equipamento> equipamentosSemSup() {
+        ArrayList <Equipamento> aux = new ArrayList < > ();
+        int equip = 0;
+        int k = 0;
+        
+        for (int j=0; j<getEquipamentos().size(); j++) {
+            for (int i=0; i<chamados.size(); i++) {
+                if(chamados.get(i).getEquipamentoSuporte() != getEquipamentos().get(j)) {
+                    equip++;
+                    if(equip == chamados.size()) {
+                        aux.add(k,getEquipamentos().get(j));
+                        k++;
+                    } 
+                }
+        
+            }
+        }
+        return aux;    
     }
 
 }
