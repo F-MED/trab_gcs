@@ -14,6 +14,22 @@ public class Departamento{
         this.IDDEPART = idDepart;
     }
 
+    public ArrayList<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public ArrayList<Equipamento> getEquipamentos() {
+        return equipamentos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getID() {
+        return IDDEPART;
+    }
+
     /*
     se algumem tiver duvida sobre funcionario.setDepartamento(this);
     basicamente usar o this(só this, nao this.algumaCoisa) tu referencia o proprio objeto que o metodo esta sendo executado
@@ -83,39 +99,23 @@ public class Departamento{
 
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
-        return funcionarios;
-    }
-
-    public ArrayList<Equipamento> getEquipamentos() {
-        return equipamentos;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public int getID() {
-        return IDDEPART;
-
-    }
     public ArrayList <Equipamento> pesquisaEquipamento (String descricao){
-    ArrayList <Equipamento> auxiliar = new ArrayList < > ();
-    for (int i = 0 ; i < equipamentos.size(); i++){
-        if (descricao.equals(equipamentos.get(i).getDescricao())){
-        auxiliar.add(equipamentos.get(i));
-        }       
-    }
-     return auxiliar;
-    }
-    
-    public boolean removeEquipamento(Equipamento equipamento){
-        for(Equipamento e : equipamentos){
-            if(e.equals(equipamento)){
-                return equipamentos.remove(equipamento);
+        ArrayList<Equipamento> auxiliar = new ArrayList<> ();
+
+        for (int i = 0 ; i < equipamentos.size(); i++){
+            if (descricao.equals(equipamentos.get(i).getDescricao())){
+                auxiliar.add(equipamentos.get(i));
             }
         }
-        return false;
+        return auxiliar;
+    }
+
+    public boolean removeEquipamento(Equipamento equipamento){
+        return equipamentos.remove(equipamento);
+    }
+
+    public boolean removeFuncionario(Funcionario funcionario){
+        return funcionarios.remove(funcionario);
     }
 }
 
