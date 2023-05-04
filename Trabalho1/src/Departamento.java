@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-public class Departamento{
+
+public class Departamento {
 
     private final int IDDEPART; // atributo final por ser o atributo identificador e nao devera ser mudado
     private ArrayList<Funcionario> funcionarios; // a "lista" dos funcionrios do departamento
@@ -31,91 +32,94 @@ public class Departamento{
     }
 
     /*
-    se algumem tiver duvida sobre funcionario.setDepartamento(this);
-    basicamente usar o this(só this, nao this.algumaCoisa) tu referencia o proprio objeto que o metodo esta sendo executado
-    se tivesse um objeto departamento com o nome do objeto de departamentoDeCiencias
-    se tu rodasse -> departamentoDeCiencias.add(funcionario)
-    o que ia acontecer era
-        if(adicionado){
-            funcionario.setDepartamento(departamentoDeCiencias);
-            return true;
-        }
-        else{
-            return false;
-        }
+     * se algumem tiver duvida sobre funcionario.setDepartamento(this);
+     * basicamente usar o this(só this, nao this.algumaCoisa) tu referencia o
+     * proprio objeto que o metodo esta sendo executado
+     * se tivesse um objeto departamento com o nome do objeto de
+     * departamentoDeCiencias
+     * se tu rodasse -> departamentoDeCiencias.add(funcionario)
+     * o que ia acontecer era
+     * if(adicionado){
+     * funcionario.setDepartamento(departamentoDeCiencias);
+     * return true;
+     * }
+     * else{
+     * return false;
+     * }
      */
 
-    public boolean addFuncionario(Funcionario funcionario){ // adiciona funcionarios na "lista" de funcionarios
+    public boolean addFuncionario(Funcionario funcionario) { // adiciona funcionarios na "lista" de funcionarios
         boolean adicionado = funcionarios.add(funcionario);
-        if(adicionado){ // usa o valor de adicionado para validar o if, não precisando usar adiconado==true
-            funcionario.setDepartamento(this); // autoreferencia para o departamento que o funcionario esta sendo adicionado
+        if (adicionado) { // usa o valor de adicionado para validar o if, não precisando usar
+                          // adiconado==true
+            funcionario.setDepartamento(this); // autoreferencia para o departamento que o funcionario esta sendo
+                                               // adicionado
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public boolean addEquipamento(Equipamento equipamento){// adiciona equipamentos na "lista" de equipamentos
+    public boolean addEquipamento(Equipamento equipamento) {// adiciona equipamentos na "lista" de equipamentos
         boolean adicionado = equipamentos.add(equipamento);
-        if(adicionado){ // usa o valor de adicionado para validar o if, não precisando usar adiconado==true
-            equipamento.setDepartamento(this); // autoreferencia para o departamento que o funcionario esta sendo adicionado
+        if (adicionado) { // usa o valor de adicionado para validar o if, não precisando usar
+                          // adiconado==true
+            equipamento.setDepartamento(this); // autoreferencia para o departamento que o funcionario esta sendo
+                                               // adicionado
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public boolean funcionarioEstaDepartamento(int id){
-        // se acharem mais apropriado, penso que seria bem de boa de mudar o id por um objeto funcionario
-        for (Funcionario f : funcionarios){
-            if(id==f.getID()){
+    public boolean funcionarioEstaDepartamento(int id) {
+        // se acharem mais apropriado, penso que seria bem de boa de mudar o id por um
+        // objeto funcionario
+        for (Funcionario f : funcionarios) {
+            if (id == f.getID()) {
                 return true;
             }
         }
         return false;
         /*
-        dai seria mais ou menos assim
-        public boolean funcionarioEstaDepartamento(Funcionario func){
-        for (Funcionario f : funcionarios){
-            if(func==f.getID()){
-                return true;
-            }
-        }
-        return false;
-        }
+         * dai seria mais ou menos assim
+         * public boolean funcionarioEstaDepartamento(Funcionario func){
+         * for (Funcionario f : funcionarios){
+         * if(func==f.getID()){
+         * return true;
+         * }
+         * }
+         * return false;
+         * }
          */
     }
 
-    public boolean equipamentoEstaDepartamento(int id){
-        for (Equipamento e : equipamentos){
-            if(id==e.getID()){
+    public boolean equipamentoEstaDepartamento(int id) {
+        for (Equipamento e : equipamentos) {
+            if (id == e.getID()) {
                 return true;
             }
         }
         return false;
 
-
     }
 
-    public ArrayList <Equipamento> pesquisaEquipamento (String descricao){
-        ArrayList<Equipamento> auxiliar = new ArrayList<> ();
+    public ArrayList<Equipamento> pesquisaEquipamento(String descricao) {
+        ArrayList<Equipamento> auxiliar = new ArrayList<>();
 
-        for (int i = 0 ; i < equipamentos.size(); i++){
-            if (descricao.equals(equipamentos.get(i).getDescricao())){
+        for (int i = 0; i < equipamentos.size(); i++) {
+            if (descricao.equals(equipamentos.get(i).getDescricao())) {
                 auxiliar.add(equipamentos.get(i));
             }
         }
         return auxiliar;
     }
 
-    public boolean removeEquipamento(Equipamento equipamento){
+    public boolean removeEquipamento(Equipamento equipamento) {
         return equipamentos.remove(equipamento);
     }
 
-    public boolean removeFuncionario(Funcionario funcionario){
+    public boolean removeFuncionario(Funcionario funcionario) {
         return funcionarios.remove(funcionario);
     }
 }
-

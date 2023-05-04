@@ -11,9 +11,11 @@ public class Chamado {
 
     /**
      * metodo construtor
-     * @param IDCHAMADO identificador do chamado
-     * @param equipamentoSuporte equipamento que o suporte sera feito
+     * 
+     * @param IDCHAMADO           identificador do chamado
+     * @param equipamentoSuporte  equipamento que o suporte sera feito
      * @param funcionarioQueAbriu o funcionario que abriu o chamado
+
      * @param descricao a descricao do problema
      * @param dataAberto a data que foi aberto
      * @param resolucao texto escrito pelo funcionario do suporte que atendeu o chamado
