@@ -181,12 +181,18 @@ public class App {
                     printEquipamentos();
                     System.out.println("informe o codigo do equipamento: ");
                     int auxCodigoEquipamento = in.nextInt();
-                    ArrayList<Chamado> auxChamados = equipeDeSuporte.listaChamados(auxCodigoEquipamento);
+                    ArrayList<Chamado> auxChamados = equipeDeSuporte.listaChamadosPorEquipamentoId(auxCodigoEquipamento);
                     for (Chamado c : auxChamados) {
                         System.out.println(c.toString());
                     }
                     break;
                 case 7:
+                    System.out.println("informe a palavra chave");
+                    String palavraChave = in.next();
+                    auxChamados = equipeDeSuporte.listaChamado(palavraChave);
+                    for(Chamado c : auxChamados){
+                        System.out.println(c.toString());
+                    }
                     break;
                 case 8:
                     if (equipeDeSuporte == null) {
