@@ -428,15 +428,25 @@ public class App {
         }
     }
 
-    public double[] dadosChamados() {
-        if (equipeDeSuporte == null)
-            return null;
+    public double[] dadosChamados(){
+        if(equipeDeSuporte==null) return null;
         int nChamados = equipeDeSuporte.numeroDeChamados();
         int nChamadosAbertos = equipeDeSuporte.numeroDeChamadosAberto();
         int nChamadosAndamento = equipeDeSuporte.numeroDeChamadosAndamento();
         int nChamadosConcluidos = equipeDeSuporte.numeroDeChamadosConcluido();
-        return new double[] { nChamados, nChamadosAbertos, nChamadosAbertos / nChamados * 100.0, nChamadosAndamento,
-                nChamadosAndamento / nChamados * 100.0, nChamadosConcluidos, nChamadosConcluidos / nChamados * 100.0 };
+        double nChamadosAbertosPercentual = 0;
+        double nChamadosAndamentoPercentual = 0;
+        double nChamadosConcluidosPercentual = 0;
+        if(nChamadosAbertos>0){
+            nChamadosAbertosPercentual = nChamadosAbertos/nChamados*100.0;
+        }
+        if(nChamadosAndamento>0){
+            nChamadosAndamentoPercentual = nChamadosAndamento/nChamados*100.0;
+        }
+        if(nChamadosConcluidos>0){
+            nChamadosConcluidosPercentual = nChamadosConcluidos/nChamados*100.0;
+        }
+        return new double[]{nChamados,nChamadosAbertos,nChamadosAbertosPercentual,nChamadosAndamento,nChamadosAndamentoPercentual,nChamadosConcluidos,nChamadosConcluidosPercentual};
     }
 
     public Funcionario procuraFuncionarioId(int id) {
