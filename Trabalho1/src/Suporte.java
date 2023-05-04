@@ -14,9 +14,10 @@ public class Suporte extends Departamento {
     public ArrayList<Chamado> getChamados() {
         return chamados;
     }
+
     public Chamado pesquisaChamado(int id) {
-        for(Chamado e : chamados){
-            if(id==e.getIDCHAMADO()){
+        for (Chamado e : chamados) {
+            if (id == e.getIDCHAMADO()) {
                 return e;
             }
         }
@@ -24,16 +25,16 @@ public class Suporte extends Departamento {
     }
 
     public boolean statusChamado(int idFunc, int idChamdo) {
-        if(funcionarioEstaDepartamento(idFunc)){
+        if (funcionarioEstaDepartamento(idFunc)) {
             Chamado aux = pesquisaChamado(idChamdo);
-            if(aux != null){
-                if(aux.getStatus().equals("Aberto")){
+            if (aux != null) {
+                if (aux.getStatus().equals("Aberto")) {
                     aux.setStatus("Em andamento");
                     return true;
-                }else if(aux.getStatus().equals("Em andamento")){
+                } else if (aux.getStatus().equals("Em andamento")) {
                     aux.setStatus("Concluido");
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -41,14 +42,37 @@ public class Suporte extends Departamento {
         return false;
     }
 
-    public ArrayList<Chamado> listaChamados(int id) {
+    public ArrayList<Chamado> listaChamadosPorEquipamentoId(int equipamentoId) {
         ArrayList<Chamado> chamados = new ArrayList<>();
         for (Chamado x : this.getChamados()) {
-            if (x.getEquipamentoSuporte().getID() == id)
+            if (x.getEquipamentoSuporte().getID() == equipamentoId)
                 chamados.add(x);
         }
         ordenaLista(chamados);
         return chamados;
+    }
+
+    private boolean chamadoContemTermo(Chamado chamado, String termoDeBusca) {
+        if (chamado.getFuncionarioQueAbriu().getNome().contains(termoDeBusca) ||
+                chamado.getDesc().contains(termoDeBusca) ||
+                chamado.getEquipamentoSuporte().getDepartamento().getNome().contains(termoDeBusca) ||
+                chamado.getDesc().contains(termoDeBusca) ||
+                chamado.getResolucao().contains(termoDeBusca)) {
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Chamado> listaChamado(String termoDeBusca) {
+        ArrayList<Chamado> resultado = new ArrayList<Chamado>();
+
+        for (Chamado chamado : this.getChamados()) {
+            if (chamadoContemTermo(chamado, termoDeBusca)) {
+                resultado.add(chamado);
+            }
+        }
+
+        return resultado;
     }
 
     public void ordenaLista(ArrayList<Chamado> lista) {
@@ -63,7 +87,8 @@ public class Suporte extends Departamento {
 
     public Chamado procuraChamadoID(int id) {
         for (Chamado c : chamados) {
-            if (c.getIDCHAMADO() == id) return c;
+            if (c.getIDCHAMADO() == id)
+                return c;
         }
         return null;
     }
@@ -106,7 +131,8 @@ public class Suporte extends Departamento {
         return count;
     }
 
-    public boolean moverEquipamento(Equipamento equipamento, Departamento departamentoDestino, Funcionario funcionario) {
+    public boolean moverEquipamento(Equipamento equipamento, Departamento departamentoDestino,
+            Funcionario funcionario) {
         if (funcionario.getDepartamento() instanceof Suporte) {
             equipamento.getDepartamento().removeEquipamento(equipamento);
             equipamento.setDepartamento(departamentoDestino);
@@ -120,23 +146,24 @@ public class Suporte extends Departamento {
         ArrayList<Funcionario> list = new ArrayList<>();
         ArrayList<Chamado> chamados = getChamados();
 
-        for(int i = 0; i<chamados.size(); i++) {
-            if(!(list.contains(chamados.get(i).getFuncionarioQueAbriu()))) {
+        for (int i = 0; i < chamados.size(); i++) {
+            if (!(list.contains(chamados.get(i).getFuncionarioQueAbriu()))) {
                 list.add(chamados.get(i).getFuncionarioQueAbriu());
             }
         }
         return list;
     }
 
-    public boolean removeChamado(int id){
-        for(Chamado c : chamados){
-            if(c.getIDCHAMADO()==id){
+    public boolean removeChamado(int id) {
+        for (Chamado c : chamados) {
+            if (c.getIDCHAMADO() == id) {
                 chamados.remove(c);
                 return true;
             }
         }
         return false;
     }
+
     public Funcionario maisChamados() {
         Funcionario maisC = null;
         int maior = 0;
@@ -156,36 +183,35 @@ public class Suporte extends Departamento {
         return maisC;
     }
 
-        public Chamado[] getChamadosDate(Date data) {
-            Chamado chamadosdata[] = new Chamado[chamados.size()];
-            int j = 0;
-            for (int i=0; i<chamados.size(); i++) {
-                if(chamados.get(i).getDataAberto() == data) {
-                    chamadosdata[j] = chamados.get(i);
-                    j++;
-                }
+    public Chamado[] getChamadosDate(Date data) {
+        Chamado chamadosdata[] = new Chamado[chamados.size()];
+        int j = 0;
+        for (int i = 0; i < chamados.size(); i++) {
+            if (chamados.get(i).getDataAberto() == data) {
+                chamadosdata[j] = chamados.get(i);
+                j++;
             }
-            return chamadosdata;
         }
-
-        public ArrayList <Equipamento> equipamentosSemSup() {
-            ArrayList <Equipamento> aux = new ArrayList < > ();
-            int equip = 0;
-            int k = 0;
-
-            for (int j=0; j<getEquipamentos().size(); j++) {
-                for (int i=0; i<chamados.size(); i++) {
-                    if(chamados.get(i).getEquipamentoSuporte() != getEquipamentos().get(j)) {
-                        equip++;
-                        if(equip == chamados.size()) {
-                            aux.add(k,getEquipamentos().get(j));
-                            k++;
-                        }
-                    }
-
-                }
-            }
-            return aux;
-        }
+        return chamadosdata;
     }
 
+    public ArrayList<Equipamento> equipamentosSemSup() {
+        ArrayList<Equipamento> aux = new ArrayList<>();
+        int equip = 0;
+        int k = 0;
+
+        for (int j = 0; j < getEquipamentos().size(); j++) {
+            for (int i = 0; i < chamados.size(); i++) {
+                if (chamados.get(i).getEquipamentoSuporte() != getEquipamentos().get(j)) {
+                    equip++;
+                    if (equip == chamados.size()) {
+                        aux.add(k, getEquipamentos().get(j));
+                        k++;
+                    }
+                }
+
+            }
+        }
+        return aux;
+    }
+}

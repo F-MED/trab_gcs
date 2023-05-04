@@ -4,11 +4,10 @@ public class Chamado {
     private final int IDCHAMADO; // atributo final por ser o atributo identificador e nao devera ser mudado
     private Equipamento equipamentoSuporte; // o Equipamento(objeto) que precisa de suporte
     private Funcionario funcionarioQueAbriu; // o Funcionario(objeto) que pediu o de suporte
-    private String desc; // a descricao do problema do equipamento
+    private String descricao; // a descricao do problema do equipamento
     private Date dataAberto; // a data que o suporte foi aberta
-    private String status; // o status do suporte do equipamento(aberto -> em andamento -> concluído)
-
-    // metodo construtor
+    private String status; // o status do suporte do equipamento(aberto -> em andamento ->concluído)
+    private String resolucao; // texto descrevendo a resolucao do chamado
 
     /**
      * metodo construtor
@@ -16,20 +15,22 @@ public class Chamado {
      * @param IDCHAMADO           identificador do chamado
      * @param equipamentoSuporte  equipamento que o suporte sera feito
      * @param funcionarioQueAbriu o funcionario que abriu o chamado
-     * @param desc                a descricao do problema
-     * @param dataAberto          a data que foi aberto
+
+     * @param descricao a descricao do problema
+     * @param dataAberto a data que foi aberto
+     * @param resolucao texto escrito pelo funcionario do suporte que atendeu o chamado
      */
-    public Chamado(int IDCHAMADO, Equipamento equipamentoSuporte, Funcionario funcionarioQueAbriu, String desc,
-            Date dataAberto) {
+    
+    public Chamado(int IDCHAMADO, Equipamento equipamentoSuporte, Funcionario funcionarioQueAbriu, String descricao, Date dataAberto) {
         this.IDCHAMADO = IDCHAMADO;
         this.equipamentoSuporte = equipamentoSuporte;
         this.funcionarioQueAbriu = funcionarioQueAbriu;
-        this.desc = desc;
+        this.descricao = descricao;
         this.dataAberto = dataAberto;
-        status = "aberto";
+        this.status = "ativo";
     }
 
-    // gettes-------v
+    // getters-------
     public int getIDCHAMADO() {
         return IDCHAMADO;
     }
@@ -43,7 +44,7 @@ public class Chamado {
     }
 
     public String getDesc() {
-        return desc;
+        return descricao;
     }
 
     public Date getDataAberto() {
@@ -54,19 +55,25 @@ public class Chamado {
         return status;
     }
 
+    public String getResolucao(){
+        return resolucao;
+    }
+
     // setters-----
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String descricao) {
+        this.descricao = descricao;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public String toString() {
-        String aux = "id do chamado: " + IDCHAMADO + " equipamento: " + equipamentoSuporte.toString() + " funcionario: "
-                + funcionarioQueAbriu.toString() + " descricao do chamado: " + desc + " data: " + dataAberto.toString()
-                + " status: " + status;
+    public void setResolucao(String resolucao){
+        this.resolucao = resolucao;
+    }
+    
+    public String toString(){
+        String aux = "id do chamado: " + IDCHAMADO + " equipamento: " + equipamentoSuporte.toString() + " funcionario: " + funcionarioQueAbriu.toString() + " descricao do chamado: " + descricao + " data: " + dataAberto.toString() + " status: " + status;
         return aux;
     }
 }
