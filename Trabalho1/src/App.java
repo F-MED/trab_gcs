@@ -170,7 +170,7 @@ public class App {
                     printEquipamentos();
                     System.out.println("informe o codigo do equipamento: ");
                     int auxCodigoEquipamento = in.nextInt();
-                    ArrayList<Chamado> auxChamados = equipeDeSuporte.listaChamados(auxCodigoEquipamento);
+                    ArrayList<Chamado> auxChamados = equipeDeSuporte.listaChamadosPorEquipamentoId(auxCodigoEquipamento);
                     for (Chamado c : auxChamados) {
                         System.out.println(c.toString());
                     }
