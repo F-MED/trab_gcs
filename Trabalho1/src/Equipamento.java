@@ -1,13 +1,13 @@
 import java.util.Date;
 //api do Date: https://docs.oracle.com/javase/8/docs/api/java/util/Date.html
 
-public class Equipamento{
+public class Equipamento {
     private final int IDEQUIP;
-    private Date data; // pensei em usar final, mas deixei sem por que imaginei que a data seria informada pelo usuario
+    private Date data; // pensei em usar final, mas deixei sem por que imaginei que a data seria
+                       // informada pelo usuario
     private String nome;
     private Departamento departamento;
     private String descricao;
-
 
     public Equipamento(int IDEQUIP, String nome, Departamento departamento, String descricao, Date data) {
         this.IDEQUIP = IDEQUIP;
