@@ -311,7 +311,11 @@ public class App {
                             System.out.println("Informe o código do departamento");
                             auxCodigoDepartamento = in.nextInt();
                             auxDepartamento = empresa.procuraDepartamentoId(auxCodigoDepartamento);
-                            empresa.removeDepartamento(auxDepartamento);
+                            if(empresa.removeDepartamento(auxDepartamento)) {
+                                System.out.println("Departamento removido com sucesso!");
+                            }else{
+                                System.out.println("ERRO: remoção não realizada");
+                            }
                             break;
                         case 9:
                             empresa.printEquipamentos();
@@ -326,9 +330,12 @@ public class App {
                             }
                             break;
                         case 10:
-                            empresa.removerEquipeSuporte();
-                            equipeDeSuporte = null;
-                            System.out.println("Equipe de suporte excluida");
+                            if(empresa.removerEquipeSuporte()) {
+                                equipeDeSuporte = null;
+                                System.out.println("Equipe de suporte removida com sucesso!");
+                            }else{
+                                System.out.println("ERRO: remoção não realizada");
+                            }
                             break;
                         default:
                             System.out.println("Opção invalida");
