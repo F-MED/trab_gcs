@@ -1,7 +1,5 @@
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-//api do Date: https://docs.oracle.com/javase/8/docs/api/java/util/Date.html
 
 public class Equipamento {
     private final int IDEQUIP;
