@@ -1,5 +1,4 @@
 import static java.lang.System.exit;
-
 import java.util.*;
 
 public class App {
