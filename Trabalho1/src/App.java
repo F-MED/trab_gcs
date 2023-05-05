@@ -24,63 +24,63 @@ public class App {
         empresa.adicionaDepartamento(new Departamento("departamento de ciencias", 3));
         Funcionario aux = new Funcionario(1, "fulano", empresa.procuraDepartamentoId(1));
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(2, "fulana", empresa.procuraDepartamentoId(0));
+        aux = new Funcionario(2, "fulana", empresa.procuraDepartamentoId(1));
         empresa.procuraDepartamentoId(0).addFuncionario(aux);
-        aux = new Funcionario(3, "ciclano", empresa.procuraDepartamentoId(0));
+        aux = new Funcionario(3, "ciclano", empresa.procuraDepartamentoId(1));
         empresa.procuraDepartamentoId(0).addFuncionario(aux);
-        aux = new Funcionario(4, "ciclana", empresa.procuraDepartamentoId(0));
+        aux = new Funcionario(4, "ciclana", empresa.procuraDepartamentoId(1));
         empresa.procuraDepartamentoId(0).addFuncionario(aux);
-        aux = new Funcionario(5, "antonio", empresa.procuraDepartamentoId(1));
+        aux = new Funcionario(5, "antonio", empresa.procuraDepartamentoId(2)); //---
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(6, "roberto", empresa.procuraDepartamentoId(1));
+        aux = new Funcionario(6, "roberto", empresa.procuraDepartamentoId(2));
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(7, "alberto", empresa.procuraDepartamentoId(1));
+        aux = new Funcionario(7, "alberto", empresa.procuraDepartamentoId(2));
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(8, "joserto", empresa.procuraDepartamentoId(1));
+        aux = new Funcionario(8, "joserto", empresa.procuraDepartamentoId(2));
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(9, "beltrano", empresa.procuraDepartamentoId(1));
+        aux = new Funcionario(9, "beltrano", empresa.procuraDepartamentoId(2)); //---
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(10, "newton", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(10, "newton", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(11, "einstein", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(11, "einstein", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(12, "celcius", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(12, "celcius", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(13, "fahrenheit", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(13, "fahrenheit", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(14, "volta", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(14, "volta", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(15, "lavoisier", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(15, "lavoisier", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(16, "mendel", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(16, "mendel", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        aux = new Funcionario(17, "darwin", empresa.procuraDepartamentoId(2));
+        aux = new Funcionario(17, "darwin", empresa.procuraDepartamentoId(3));
         empresa.procuraDepartamentoId(2).addFuncionario(aux);
-        equipeDeSuporte = (Suporte) empresa.procuraDepartamentoId(1);
+        equipeDeSuporte = (Suporte) empresa.procuraDepartamentoId(2);
         countIdFuncionario = 18;
         countIdDepartamento = 3;
 
-        Equipamento auxEquipe = new Equipamento(1, "telefone", empresa.procuraDepartamentoId(0), "telefone do departamento",
-            GregorianCalendar(2023, Calendar.APRIL, 29));
-        empresa.procuraDepartamentoId(0).addEquipamento(auxEquipe);
-        auxEquipe = new Equipamento(2, "telefone", empresa.procuraDepartamentoId(0), "telefone do departamento",
+        Equipamento auxEquipe = new Equipamento(1, "telefone", empresa.procuraDepartamentoId(1), "telefone do departamento",
             GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
-        auxEquipe = new Equipamento(3, "telefone", empresa.procuraDepartamentoId(0), "telefone do departamento",
+        auxEquipe = new Equipamento(2, "telefone", empresa.procuraDepartamentoId(1), "telefone do departamento",
             GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(2).addEquipamento(auxEquipe);
-        auxEquipe = new Equipamento(4, "impressora", empresa.procuraDepartamentoId(0), "telefone do departamento",
+        auxEquipe = new Equipamento(3, "telefone", empresa.procuraDepartamentoId(1), "telefone do departamento",
             GregorianCalendar(2023, Calendar.APRIL, 29));
-        empresa.procuraDepartamentoId(0).addEquipamento(auxEquipe);
-        auxEquipe = new Equipamento(5, "impressora", empresa.procuraDepartamentoId(0), "telefone do departamento",
-            GregorianCalendar(2023, Calendar.APRIL, 29));
-        empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
-        auxEquipe = new Equipamento(6, "monitor", empresa.procuraDepartamentoId(0), "telefone do departamento",
-            GregorianCalendar(2023, Calendar.APRIL, 29));
-        empresa.procuraDepartamentoId(0).addEquipamento(auxEquipe);
-        auxEquipe = new Equipamento(7, "monitor", empresa.procuraDepartamentoId(0), "telefone do departamento",
+        empresa.procuraDepartamentoId(3).addEquipamento(auxEquipe);
+        auxEquipe = new Equipamento(4, "impressora", empresa.procuraDepartamentoId(1), "telefone do departamento",
             GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
+        auxEquipe = new Equipamento(5, "impressora", empresa.procuraDepartamentoId(1), "telefone do departamento",
+            GregorianCalendar(2023, Calendar.APRIL, 29));
+        empresa.procuraDepartamentoId(2).addEquipamento(auxEquipe);
+        auxEquipe = new Equipamento(6, "monitor", empresa.procuraDepartamentoId(1), "telefone do departamento",
+            GregorianCalendar(2023, Calendar.APRIL, 29));
+        empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
+        auxEquipe = new Equipamento(7, "monitor", empresa.procuraDepartamentoId(1), "telefone do departamento",
+            GregorianCalendar(2023, Calendar.APRIL, 29));
+        empresa.procuraDepartamentoId(2).addEquipamento(auxEquipe);
         countIdEquipamento = 8;
     }
 

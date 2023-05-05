@@ -12,6 +12,10 @@ public class Empresa {
   	public boolean adicionaDepartamento(Departamento d) {
     	return departamentos.add(d);
   	}
+
+	public boolean removeDepartamento(Departamento d) {
+		return departamentos.remove(d);
+	}
 	//Métodos de print
 	public void printDepartamentos() {
 		for(Departamento d : departamentos) {
@@ -79,6 +83,29 @@ public class Empresa {
 			equipamentos = d.getEquipamentos();
 			for(Equipamento e : equipamentos) {
 				if(id == e.getID()) return true;
+			}
+		}
+		return false;
+	}
+	//Método de busca equipamentos pela descrição
+	public ArrayList<Equipamento> equipamentoDescricao(String auxDesc){
+        ArrayList<Equipamento> auxArrayEquipamentos = new ArrayList<>();
+
+        for(int i = 0; i < departamentos.size(); i++) {
+            Departamento auxDepartamento = departamentos.get(i);
+            ArrayList<Equipamento> auxArrayEquipamentosInterno = auxDepartamento.pesquisaEquipamento(auxDesc);
+            for (int j = 0; j < auxArrayEquipamentosInterno.size(); i++) {
+                auxArrayEquipamentos.add(auxArrayEquipamentosInterno.get(j));
+            }
+        }
+        return auxArrayEquipamentos;
+    }
+
+	public boolean removerEquipeSuporte() {
+		for(Departamento e : departamentos){
+			if(e instanceof Suporte) {
+				departamentos.remove(e);
+				return true;
 			}
 		}
 		return false;
