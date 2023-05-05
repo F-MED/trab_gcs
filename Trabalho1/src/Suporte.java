@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.*;
 
 public class Suporte extends Departamento {
     private ArrayList<Chamado> chamados;
@@ -24,19 +21,23 @@ public class Suporte extends Departamento {
         return null;
     }
 
-    public boolean statusChamado(int idFunc, int idChamdo) {
-        if (funcionarioEstaDepartamento(idFunc)) {
-            Chamado aux = pesquisaChamado(idChamdo);
-            if (aux != null) {
-                if (aux.getStatus().equals("Aberto")) {
-                    aux.setStatus("Em andamento");
-                    return true;
-                } else if (aux.getStatus().equals("Em andamento")) {
-                    aux.setStatus("Concluido");
-                    return true;
-                } else {
-                    return false;
-                }
+    public void printChamados() {
+        for (Chamado c : chamados) {
+            System.out.println(c.toString());
+        }
+    }
+
+    public boolean statusChamado(int idChamdo) {
+        Chamado aux = pesquisaChamado(idChamdo);
+        if (aux != null) {
+            if (aux.getStatus().equals("Aberto")) {
+                aux.setStatus("Em andamento");
+                return true;
+            } else if (aux.getStatus().equals("Em andamento")) {
+                aux.setStatus("Concluido");
+                return true;
+            } else {
+                return false;
             }
         }
         return false;
@@ -53,11 +54,15 @@ public class Suporte extends Departamento {
     }
 
     private boolean chamadoContemTermo(Chamado chamado, String termoDeBusca) {
+        if(chamado.getResolucao() != null){
+            if(chamado.getResolucao().contains(termoDeBusca)){
+                return true;
+            }
+        }
         if (chamado.getFuncionarioQueAbriu().getNome().contains(termoDeBusca) ||
                 chamado.getDesc().contains(termoDeBusca) ||
                 chamado.getEquipamentoSuporte().getDepartamento().getNome().contains(termoDeBusca) ||
-                chamado.getDesc().contains(termoDeBusca) ||
-                chamado.getResolucao().contains(termoDeBusca)) {
+                chamado.getDesc().contains(termoDeBusca)) {
             return true;
         }
         return false;
@@ -104,7 +109,7 @@ public class Suporte extends Departamento {
     public int numeroDeChamadosAberto() {
         int count = 0;
         for (Chamado c : chamados) {
-            if (c.getStatus().equals("aberto")) {
+            if (c.getStatus().equals("Aberto")) {
                 count++;
             }
         }
@@ -114,7 +119,7 @@ public class Suporte extends Departamento {
     public int numeroDeChamadosAndamento() {
         int count = 0;
         for (Chamado c : chamados) {
-            if (c.getStatus().equals("em andamento")) {
+            if (c.getStatus().equals("Em andamento")) {
                 count++;
             }
         }
@@ -124,7 +129,7 @@ public class Suporte extends Departamento {
     public int numeroDeChamadosConcluido() {
         int count = 0;
         for (Chamado c : chamados) {
-            if (c.getStatus().equals("concluido")) {
+            if (c.getStatus().equals("Concluido")) {
                 count++;
             }
         }
@@ -164,54 +169,43 @@ public class Suporte extends Departamento {
         return false;
     }
 
-    public Funcionario maisChamados() {
-        Funcionario maisC = null;
+    public ArrayList<Funcionario> maisChamados() {
+        ArrayList<Funcionario> maisC = new ArrayList<>();
         int maior = 0;
 
-        for (int j = 0; j < getFuncionarios().size(); j++) {
+        for (int j = 0; j < chamados.size(); j++) {
             int chamds = 0;
+            Funcionario auxFuncionario = chamados.get(j).getFuncionarioQueAbriu() ;
             for (int i = 0; i < chamados.size(); i++) {
-                if (chamados.get(i).getFuncionarioQueAbriu() == getFuncionarios().get(j)) {
+                if (chamados.get(i).getFuncionarioQueAbriu().getID() == auxFuncionario.getID()) {
                     chamds++;
                 }
             }
-            if (chamds > maior) {
+            if (chamds >= maior) {
                 maior = chamds;
-                maisC = getFuncionarios().get(j);
+                maisC.add(auxFuncionario);
             }
         }
         return maisC;
     }
 
-    public Chamado[] getChamadosDate(Date data) {
-        Chamado chamadosdata[] = new Chamado[chamados.size()];
+    public ArrayList<Chamado> getChamadosDate(GregorianCalendar data) {
+        ArrayList<Chamado> chamadosdata = new ArrayList<>();
         int j = 0;
         for (int i = 0; i < chamados.size(); i++) {
-            if (chamados.get(i).getDataAberto() == data) {
-                chamadosdata[j] = chamados.get(i);
-                j++;
+            if (chamados.get(i).getDataAberto().equals(data)) {
+                chamadosdata.add(chamados.get(i));
             }
         }
         return chamadosdata;
     }
 
-    public ArrayList<Equipamento> equipamentosSemSup() {
-        ArrayList<Equipamento> aux = new ArrayList<>();
-        int equip = 0;
-        int k = 0;
-
-        for (int j = 0; j < getEquipamentos().size(); j++) {
-            for (int i = 0; i < chamados.size(); i++) {
-                if (chamados.get(i).getEquipamentoSuporte() != getEquipamentos().get(j)) {
-                    equip++;
-                    if (equip == chamados.size()) {
-                        aux.add(k, getEquipamentos().get(j));
-                        k++;
-                    }
-                }
-
+    public boolean equipamentosTemSup(Equipamento equipamento) {
+        for(int i = 0; i < chamados.size(); i++){
+            if(equipamento.getID()==chamados.get(i).getEquipamentoSuporte().getID()){
+                return true;
             }
         }
-        return aux;
+        return false;
     }
 }
