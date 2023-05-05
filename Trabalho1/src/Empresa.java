@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.EnumMap;
 
 public class Empresa {
 	private ArrayList<Departamento> departamentos;
@@ -25,8 +27,8 @@ public class Empresa {
 
 	public void printEquipamentos() {
 		for(Departamento d : departamentos) {
-			equipamentos = d.getEquipamentos();
-			for(Equipamento e : equipamentos) {
+			ArrayList<Equipamento> auxEquip = d.getEquipamentos();
+			for(Equipamento e : auxEquip) {
 				System.out.println(e.toString());
 			}
 		}
@@ -34,8 +36,8 @@ public class Empresa {
 
 	public void printFuncionarios() {
 		for(Departamento d : departamentos) {
-			funcionarios = d.getFuncionarios();
-			for(Funcionario f : funcionarios) {
+			ArrayList<Funcionario> auxFunc = d.getFuncionarios();
+			for(Funcionario f : auxFunc) {
 				System.out.println(f.toString());
 			}
 		}
@@ -43,8 +45,8 @@ public class Empresa {
 	//Métodos de busca - retorna objeto
 	public Funcionario procuraFuncionarioId(int id) {
 		for(Departamento d : departamentos) {
-			funcionarios = d.getFuncionarios();
-			for(Funcionario f : funcionarios) {
+			ArrayList<Funcionario> auxFunc = d.getFuncionarios();
+			for(Funcionario f : auxFunc) {
 				if(id == f.getID()) return f;
 			}
 		}
@@ -53,8 +55,8 @@ public class Empresa {
 
 	public Equipamento procuraEquipamentoId(int id) {
 		for(Departamento d : departamentos) {
-			equipamentos = d.getEquipamentos();
-			for(Equipamento e : equipamentos) {
+			ArrayList<Equipamento> auxEquip = d.getEquipamentos();
+			for(Equipamento e : auxEquip) {
 				if(id == e.getID()) return e;
 			}
 		}
@@ -70,8 +72,8 @@ public class Empresa {
 	//Métodos de busca - retorna boolean
 	public boolean funcionarioEstaNaEmpresa(int id) {
 		for(Departamento d : departamentos) {
-			funcionarios = d.getFuncionarios();
-			for(Funcionario f : funcionarios) {
+			ArrayList<Funcionario> auxFunc = d.getFuncionarios();
+			for(Funcionario f : auxFunc) {
 				if(id == f.getID()) return true;
 			}
 		}
@@ -80,8 +82,8 @@ public class Empresa {
 
 	public boolean equipamentoEstaNaEmpresa(int id) {
 		for(Departamento d : departamentos) {
-			equipamentos = d.getEquipamentos();
-			for(Equipamento e : equipamentos) {
+			ArrayList<Equipamento> auxEquip = d.getEquipamentos();
+			for(Equipamento e : auxEquip) {
 				if(id == e.getID()) return true;
 			}
 		}
@@ -110,4 +112,19 @@ public class Empresa {
 		}
 		return false;
 	}
-}
+	public void printEquipSemSuporte(ArrayList<Chamado> chamados){
+		Suporte auxSup = null;
+		for(Departamento d : departamentos){
+			if(d instanceof Suporte) auxSup =(Suporte) d;
+		}
+		if(auxSup==null){
+			System.out.println("erro, nao ha equipe de suporte");
+			return;
+		}
+		for(Departamento d : departamentos){
+			ArrayList<Equipamento> equip = d.getEquipamentos();
+			for(Equipamento e : equip){
+				if(!auxSup.equipamentosTemSup(e)) System.out.println(e.toString());
+			}
+		}
+	}
