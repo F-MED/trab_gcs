@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class Suporte extends Departamento {
     private ArrayList<Chamado> chamados;
@@ -189,12 +192,13 @@ public class Suporte extends Departamento {
         return maisC;
     }
 
-    public ArrayList<Chamado> getChamadosDate(GregorianCalendar data) {
-        ArrayList<Chamado> chamadosdata = new ArrayList<>();
+    public ArrayList<Chamado> getChamadosDate(Date data) {
+        ArrayList<Chamado> chamadosdata = new ArrayList<Chamado>();
         int j = 0;
         for (int i = 0; i < chamados.size(); i++) {
-            if (chamados.get(i).getDataAberto().equals(data)) {
-                chamadosdata.add(chamados.get(i));
+            if (chamados.get(i).getDataAberto() == data) {
+                chamadosdata.set(j, chamados.get(i));
+                j++;
             }
         }
         return chamadosdata;

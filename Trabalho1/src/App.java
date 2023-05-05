@@ -1,6 +1,8 @@
 import static java.lang.System.exit;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
 
 public class App {
     private Scanner in;
@@ -59,27 +61,31 @@ public class App {
         countIdDepartamento = 3;
 
         Equipamento auxEquipe = new Equipamento(1, "telefone", empresa.procuraDepartamentoId(1), "telefone do departamento",
-            new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
         auxEquipe = new Equipamento(2, "telefone", empresa.procuraDepartamentoId(1), "telefone do departamento",
-            new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(2).addEquipamento(auxEquipe);
         auxEquipe = new Equipamento(3, "telefone", empresa.procuraDepartamentoId(1), "telefone do departamento",
-            new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(3).addEquipamento(auxEquipe);
         auxEquipe = new Equipamento(4, "impressora", empresa.procuraDepartamentoId(1), "telefone do departamento",
-            new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
         auxEquipe = new Equipamento(5, "impressora", empresa.procuraDepartamentoId(1), "telefone do departamento",
-                new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(2).addEquipamento(auxEquipe);
         auxEquipe = new Equipamento(6, "monitor", empresa.procuraDepartamentoId(1), "telefone do departamento",
-                new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(1).addEquipamento(auxEquipe);
         auxEquipe = new Equipamento(7, "monitor", empresa.procuraDepartamentoId(1), "telefone do departamento",
-            new GregorianCalendar(2023, Calendar.APRIL, 29));
+            GregorianCalendar(2023, Calendar.APRIL, 29));
         empresa.procuraDepartamentoId(2).addEquipamento(auxEquipe);
         countIdEquipamento = 8;
+    }
+
+    private Date GregorianCalendar(int i, int april, int j) {
+        return null;
     }
 
     public void executa() {
@@ -211,7 +217,7 @@ public class App {
                     int mes = in.nextInt();
                     System.out.println("Informe o ano");
                     int ano = in.nextInt();
-                    GregorianCalendar data = new GregorianCalendar(ano, mes, dia);
+                    Date data = GregorianCalendar(ano, mes, dia);
                     ArrayList<Chamado> chamados = equipeDeSuporte.getChamadosDate(data);
                     if(chamados.isEmpty()) System.out.println("nao ha chamados nesse dia");
                     for (Chamado c : chamados) {
@@ -297,7 +303,7 @@ public class App {
                             mes = in.nextInt();
                             System.out.println("Informe o ano");
                             ano = in.nextInt();
-                            data = new GregorianCalendar(ano, mes, dia);
+                            data = GregorianCalendar(ano, mes, dia);
                             Equipamento auxEquipe = new Equipamento(countIdEquipamento, nomeEquipamento,
                                     auxDepartamento, auxDescricao, data);
                             auxEquipe.getDepartamento().addEquipamento(auxEquipe);
@@ -384,7 +390,7 @@ public class App {
         int mes = in.nextInt();
         System.out.println("Informe o ano");
         int ano = in.nextInt();
-        GregorianCalendar data = new GregorianCalendar(ano, mes, dia);
+        Date data = GregorianCalendar(ano, mes, dia);
         System.out.println("Informe a descrição do chamado");
         Scanner auxScanner = new Scanner(System.in);
         String descricao = auxScanner.nextLine();
@@ -411,9 +417,9 @@ public class App {
         double[] aux = dadosChamados();
         if (aux == null) return;
         System.out.println("Número total de chamados: " + (int) aux[0]);
-        System.out.println("Número de chamados em aberto: " + (int) aux[1] + " | percentual: " + aux[2]);
-        System.out.println("Número de chamados em andamento: " + (int) aux[3] + " | percentual: " + aux[4]);
-        System.out.println("Número de chamados concluidos: " + (int) aux[5] + " | percentual: " + aux[6]);
+        System.out.println("Número de chamados em aberto: " + (int) aux[1] + "percentual: " + aux[2]);
+        System.out.println("Número de chamados em andamento: " + (int) aux[3] + "percentual: " + aux[4]);
+        System.out.println("Número de chamados concluidos: " + (int) aux[4] + "percentual: " + aux[5]);
     }
 
     public double[] dadosChamados(){
