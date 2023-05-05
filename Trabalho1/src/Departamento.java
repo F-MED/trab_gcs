@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class Departamento {
-
     private final int IDDEPART; // atributo final por ser o atributo identificador e nao devera ser mudado
     private ArrayList<Funcionario> funcionarios; // a "lista" dos funcionrios do departamento
     private ArrayList<Equipamento> equipamentos; // a "lista" dos equipamentos do departamento
