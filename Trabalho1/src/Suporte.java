@@ -24,19 +24,17 @@ public class Suporte extends Departamento {
         return null;
     }
 
-    public boolean statusChamado(int idFunc, int idChamdo) {
-        if (funcionarioEstaDepartamento(idFunc)) {
-            Chamado aux = pesquisaChamado(idChamdo);
-            if (aux != null) {
-                if (aux.getStatus().equals("Aberto")) {
-                    aux.setStatus("Em andamento");
-                    return true;
-                } else if (aux.getStatus().equals("Em andamento")) {
-                    aux.setStatus("Concluido");
-                    return true;
-                } else {
-                    return false;
-                }
+    public boolean statusChamado(int idChamdo) {
+        Chamado aux = pesquisaChamado(idChamdo);
+        if (aux != null) {
+            if (aux.getStatus().equals("Aberto")) {
+                aux.setStatus("Em andamento");
+                return true;
+            } else if (aux.getStatus().equals("Em andamento")) {
+                aux.setStatus("Concluido");
+                return true;
+            } else {
+                return false;
             }
         }
         return false;
@@ -104,7 +102,7 @@ public class Suporte extends Departamento {
     public int numeroDeChamadosAberto() {
         int count = 0;
         for (Chamado c : chamados) {
-            if (c.getStatus().equals("aberto")) {
+            if (c.getStatus().equals("Aberto")) {
                 count++;
             }
         }
@@ -114,7 +112,7 @@ public class Suporte extends Departamento {
     public int numeroDeChamadosAndamento() {
         int count = 0;
         for (Chamado c : chamados) {
-            if (c.getStatus().equals("em andamento")) {
+            if (c.getStatus().equals("Em andamento")) {
                 count++;
             }
         }
@@ -124,7 +122,7 @@ public class Suporte extends Departamento {
     public int numeroDeChamadosConcluido() {
         int count = 0;
         for (Chamado c : chamados) {
-            if (c.getStatus().equals("concluido")) {
+            if (c.getStatus().equals("Concluido")) {
                 count++;
             }
         }

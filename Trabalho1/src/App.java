@@ -120,7 +120,7 @@ public class App {
                         printChamados();
                         System.out.println("Informe o código do chamado");
                         int idChamado = in.nextInt();
-                        equipeDeSuporte.statusChamado(login.getID(), idChamado);
+                        equipeDeSuporte.statusChamado(idChamado);
                         Chamado c = equipeDeSuporte.procuraChamadoID(idChamado);
                         System.out.println(c.toString());
                     } else {

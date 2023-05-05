@@ -27,7 +27,7 @@ public class Chamado {
         this.funcionarioQueAbriu = funcionarioQueAbriu;
         this.descricao = descricao;
         this.dataAberto = dataAberto;
-        this.status = "ativo";
+        this.status = "Aberto";
     }
 
     // getters-------
@@ -73,7 +73,11 @@ public class Chamado {
     }
     
     public String toString(){
-        String aux = "id do chamado: " + IDCHAMADO + " equipamento: " + equipamentoSuporte.toString() + " funcionario: " + funcionarioQueAbriu.toString() + " descricao do chamado: " + descricao + " data: " + dataAberto.toString() + " status: " + status;
+        String aux = "id do chamado: " + IDCHAMADO 
+            + " equipamento: " + equipamentoSuporte.toString() 
+            + " funcionario: " + funcionarioQueAbriu.toString() 
+            + " descricao do chamado: " + descricao 
+            + " data: " + dataAberto.toString() + " status: " + status;
         return aux;
     }
 }
