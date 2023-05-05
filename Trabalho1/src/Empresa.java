@@ -100,7 +100,7 @@ public class Empresa {
         }
         return auxArrayEquipamentos;
     }
-
+	//Método de remoção do departamento de Suporte
 	public boolean removerEquipeSuporte() {
 		for(Departamento e : departamentos){
 			if(e instanceof Suporte) {

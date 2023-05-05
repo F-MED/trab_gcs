@@ -25,37 +25,37 @@ public class App {
         Funcionario aux = new Funcionario(1, "fulano", empresa.procuraDepartamentoId(1));
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
         aux = new Funcionario(2, "fulana", empresa.procuraDepartamentoId(1));
-        empresa.procuraDepartamentoId(0).addFuncionario(aux);
+        empresa.procuraDepartamentoId(1).addFuncionario(aux);
         aux = new Funcionario(3, "ciclano", empresa.procuraDepartamentoId(1));
-        empresa.procuraDepartamentoId(0).addFuncionario(aux);
+        empresa.procuraDepartamentoId(1).addFuncionario(aux);
         aux = new Funcionario(4, "ciclana", empresa.procuraDepartamentoId(1));
-        empresa.procuraDepartamentoId(0).addFuncionario(aux);
-        aux = new Funcionario(5, "antonio", empresa.procuraDepartamentoId(2)); //---
         empresa.procuraDepartamentoId(1).addFuncionario(aux);
+        aux = new Funcionario(5, "antonio", empresa.procuraDepartamentoId(2)); 
+        empresa.procuraDepartamentoId(2).addFuncionario(aux);
         aux = new Funcionario(6, "roberto", empresa.procuraDepartamentoId(2));
-        empresa.procuraDepartamentoId(1).addFuncionario(aux);
+        empresa.procuraDepartamentoId(2).addFuncionario(aux);
         aux = new Funcionario(7, "alberto", empresa.procuraDepartamentoId(2));
-        empresa.procuraDepartamentoId(1).addFuncionario(aux);
+        empresa.procuraDepartamentoId(2).addFuncionario(aux);
         aux = new Funcionario(8, "joserto", empresa.procuraDepartamentoId(2));
-        empresa.procuraDepartamentoId(1).addFuncionario(aux);
-        aux = new Funcionario(9, "beltrano", empresa.procuraDepartamentoId(2)); //---
-        empresa.procuraDepartamentoId(1).addFuncionario(aux);
+        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        aux = new Funcionario(9, "beltrano", empresa.procuraDepartamentoId(2));
+        empresa.procuraDepartamentoId(2).addFuncionario(aux);
         aux = new Funcionario(10, "newton", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(11, "einstein", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(12, "celcius", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(13, "fahrenheit", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(14, "volta", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(15, "lavoisier", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(16, "mendel", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         aux = new Funcionario(17, "darwin", empresa.procuraDepartamentoId(3));
-        empresa.procuraDepartamentoId(2).addFuncionario(aux);
+        empresa.procuraDepartamentoId(3).addFuncionario(aux);
         equipeDeSuporte = (Suporte) empresa.procuraDepartamentoId(2);
         countIdFuncionario = 18;
         countIdDepartamento = 3;
@@ -151,22 +151,12 @@ public class App {
                     }
                     break;
                 case 5:
-
                     System.out.println("Informe a descrição");
                     String auxDesc = in.nextLine();
                     in.next();
-
-                    ArrayList<Equipamento> auxArrayEquipamentos = new ArrayList<>();
-                    for (int i = 0; i < empresa.size(); i++) {
-                        Departamento auxDepartamento = empresa.get(i);
-                        ArrayList<Equipamento> auxArrayEquipamentosInterno = auxDepartamento
-                                .pesquisaEquipamento(auxDesc);
-                        for (int j = 0; j < auxArrayEquipamentosInterno.size(); i++) {
-                            auxArrayEquipamentos.add(auxArrayEquipamentosInterno.get(j));
-                        }
-                    }
-                    if (!auxArrayEquipamentos.isEmpty()) {
-                        for (Equipamento e : auxArrayEquipamentos) {
+                    
+                    if (!empresa.equipamentoDescricao(auxDesc).isEmpty()) {
+                        for (Equipamento e : empresa.equipamentoDescricao(auxDesc)) {
                             System.out.println(e.toString());
                         }
                     }
@@ -321,7 +311,7 @@ public class App {
                             System.out.println("Informe o código do departamento");
                             auxCodigoDepartamento = in.nextInt();
                             auxDepartamento = empresa.procuraDepartamentoId(auxCodigoDepartamento);
-                            empresa.remove(auxDepartamento);
+                            empresa.removeDepartamento(auxDepartamento);
                             break;
                         case 9:
                             empresa.printEquipamentos();
@@ -336,7 +326,7 @@ public class App {
                             }
                             break;
                         case 10:
-                            empresa.removeIf(d -> d instanceof Suporte);
+                            empresa.removerEquipeSuporte();
                             equipeDeSuporte = null;
                             System.out.println("Equipe de suporte excluida");
                             break;
@@ -390,13 +380,11 @@ public class App {
 
     public void printPainelDados() {
         double[] aux = dadosChamados();
-        if (aux == null)
-            return;
+        if (aux == null) return;
         System.out.println("Número total de chamados: " + (int) aux[0]);
         System.out.println("Número de chamados em aberto: " + (int) aux[1] + "percentual: " + aux[2]);
         System.out.println("Número de chamados em andamento: " + (int) aux[3] + "percentual: " + aux[4]);
         System.out.println("Número de chamados concluidos: " + (int) aux[4] + "percentual: " + aux[5]);
-
     }
 
     public void printChamados() {
