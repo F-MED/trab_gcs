@@ -117,7 +117,7 @@ public class App {
                         break;
                     }
                     if (login.getDepartamento() instanceof Suporte) {
-                        printChamados();
+                        equipeDeSuporte.printChamados();
                         System.out.println("Informe o código do chamado");
                         int idChamado = in.nextInt();
                         equipeDeSuporte.statusChamado(idChamado);
@@ -289,7 +289,7 @@ public class App {
                             empresa.adicionaDepartamento(sup);
                             break;
                         case 6:
-                            printChamados();
+                            equipeDeSuporte.printChamados();
                             System.out.println("Informe o código do chamado");
                             int auxCodigoChamado = in.nextInt();
                             equipeDeSuporte.removeChamado(auxCodigoChamado);
@@ -385,13 +385,6 @@ public class App {
         System.out.println("Número de chamados em aberto: " + (int) aux[1] + "percentual: " + aux[2]);
         System.out.println("Número de chamados em andamento: " + (int) aux[3] + "percentual: " + aux[4]);
         System.out.println("Número de chamados concluidos: " + (int) aux[4] + "percentual: " + aux[5]);
-    }
-
-    public void printChamados() {
-        ArrayList<Chamado> aux = equipeDeSuporte.getChamados();
-        for (Chamado c : aux) {
-            System.out.println(c.toString());
-        }
     }
 
     public double[] dadosChamados(){

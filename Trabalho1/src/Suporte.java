@@ -24,6 +24,12 @@ public class Suporte extends Departamento {
         return null;
     }
 
+    public void printChamados() {
+        for (Chamado c : chamados) {
+            System.out.println(c.toString());
+        }
+    }
+
     public boolean statusChamado(int idChamdo) {
         Chamado aux = pesquisaChamado(idChamdo);
         if (aux != null) {
