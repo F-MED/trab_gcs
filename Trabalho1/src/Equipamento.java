@@ -1,15 +1,15 @@
-import java.util.Date;
-//api do Date: https://docs.oracle.com/javase/8/docs/api/java/util/Date.html
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-public class Equipamento{
+public class Equipamento {
     private final int IDEQUIP;
-    private Date data; // pensei em usar final, mas deixei sem por que imaginei que a data seria informada pelo usuario
+    private GregorianCalendar data; // pensei em usar final, mas deixei sem por que imaginei que a data seria
+                       // informada pelo usuario
     private String nome;
     private Departamento departamento;
     private String descricao;
 
-
-    public Equipamento(int IDEQUIP, String nome, Departamento departamento, String descricao, Date data) {
+    public Equipamento(int IDEQUIP, String nome, Departamento departamento, String descricao, GregorianCalendar data) {
         this.IDEQUIP = IDEQUIP;
         this.nome = nome;
         this.departamento = departamento;
@@ -17,7 +17,7 @@ public class Equipamento{
         this.data = data;
     }
 
-    public void setData(Date data) {
+    public void setData(GregorianCalendar data) {
         this.data = data;
     }
 
@@ -41,7 +41,18 @@ public class Equipamento{
         return descricao;
     }
 
-    public Date getData() {
+    public GregorianCalendar getData() {
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipamento{" +
+                "IDEQUIP=" + IDEQUIP +
+                ", data=" + data .get(Calendar.DAY_OF_MONTH)+ "/" + ((int) data.get(Calendar.MONTH)+1) + "/" + data.get(Calendar.YEAR) +
+                ", nome=" + nome + '\'' +
+                ", departamento=" + departamento.getNome() +
+                ", descricao=" + descricao + '\'' +
+                '}';
     }
 }

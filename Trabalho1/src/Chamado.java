@@ -1,25 +1,35 @@
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Chamado {
     private final int IDCHAMADO; // atributo final por ser o atributo identificador e nao devera ser mudado
     private Equipamento equipamentoSuporte; // o Equipamento(objeto) que precisa de suporte
     private Funcionario funcionarioQueAbriu; // o Funcionario(objeto) que pediu o de suporte
-    private String desc; // a descricao do problema do equipamento
-    private Date dataAberto; // a data que o suporte foi aberta
+    private String descricao; // a descricao do problema do equipamento
+    private GregorianCalendar dataAberto; // a data que o suporte foi aberta
     private String status; // o status do suporte do equipamento(aberto -> em andamento ->concluído)
+    private String resolucao; // texto descrevendo a resolucao do chamado
 
+    /**
+     * metodo construtor
+     *
+     * @param IDCHAMADO           identificador do chamado
+     * @param equipamentoSuporte  equipamento que o suporte sera feito
+     * @param funcionarioQueAbriu o funcionario que abriu o chamado
+     * @param descricao a descricao do problema
+     * @param dataAberto a data que foi aberto
+     */
 
-    // metodo construtor
-    public Chamado(int IDCHAMADO, Equipamento equipamentoSuporte, Funcionario funcionarioQueAbriu, String desc, Date dataAberto, String status) {
+    public Chamado(int IDCHAMADO, Equipamento equipamentoSuporte, Funcionario funcionarioQueAbriu, String descricao, GregorianCalendar dataAberto) {
         this.IDCHAMADO = IDCHAMADO;
         this.equipamentoSuporte = equipamentoSuporte;
         this.funcionarioQueAbriu = funcionarioQueAbriu;
-        this.desc = desc;
+        this.descricao = descricao;
         this.dataAberto = dataAberto;
-        this.status = status;
+        this.status = "Aberto";
     }
 
-    // gettes-------v
+    // getters-------
     public int getIDCHAMADO() {
         return IDCHAMADO;
     }
@@ -33,10 +43,10 @@ public class Chamado {
     }
 
     public String getDesc() {
-        return desc;
+        return descricao;
     }
 
-    public Date getDataAberto() {
+    public GregorianCalendar getDataAberto() {
         return dataAberto;
     }
 
@@ -44,12 +54,30 @@ public class Chamado {
         return status;
     }
 
+    public String getResolucao(){
+        return resolucao;
+    }
+
     // setters-----
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String descricao) {
+        this.descricao = descricao;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setResolucao(String resolucao){
+        this.resolucao = resolucao;
+    }
+
+    public String toString(){
+        String aux = "id do chamado: " + IDCHAMADO
+                + ", equipamento: " + equipamentoSuporte.toString()
+                + ", funcionario: " + funcionarioQueAbriu.toString()
+                + ", descricao do chamado: " + descricao
+                + ", data: " + dataAberto.get(Calendar.DAY_OF_MONTH) + "/" + ((int)dataAberto.get(Calendar.MONTH)+1) + "/" + dataAberto.get(Calendar.YEAR)
+                + ", status: " + status;
+        return aux;
     }
 }
